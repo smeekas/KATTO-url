@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>katto url</title>
+    <style>
+        #form{
+            display: flex;
+            height: 100%;
+            width: 100%;
+            
+            flex-direction: column;
+            justify-items: center;
+            align-items: center;
+
+            align-content: center;
+            justify-content: center;
+        }
+        #error{
+            text-align: center;
+        }
+    </style>
+  </head>
+  <body>
+   
+    <div id="error">
+
+    </div>
+
+    <form id="form" onsubmit="event.preventDefault(); return false;">
+
+      <label for="url">Your Url</label>
+      <input type="text" id="form-url" name="url" />
+
+      
+      <br>
+      <label for="validity">Validity of shortened url</label>
+      <select name="validity" id="form-validity">
+        <option value="d">1 day</option>
+        <option value="w">1 week</option>
+        <option value="m">1 month</option>
+        <option value="y">1 year</option>
+      </select>
+      <br>
+      <input type="button" id="form-submit" value="shorten" />
+    </form> 
+    <div id="division"></div>
+    <script src="index.js"></script>
+  </body>
+</html>
