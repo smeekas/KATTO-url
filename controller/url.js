@@ -19,9 +19,26 @@ const makeId = () => {
   console.log("ID", result);
   return result;
 };
+
+const keyExists = (key) => {
+  Url.findOne({ key: key })
+    .then((res) => {
+      if (!res) {
+        return false;
+      } else {
+        return true;
+      }
+    })
+    .catch((err) => {
+      console.log("keyExists");
+    });
+};
+
+//! SERVER SIDE URL AUTH
+//! LOCALSTORAGE OF SHORTENED URLS
 exports.postUrl = async (req, res, next) => {
-  console.log("BODYY", req.body);
-  console.log("BODYY u", req.body.url);
+  // console.log("BODYY", req.body);
+  // console.log("BODYY u", req.body.url);
   const link = req.body.url;
   // const link = 'https://www.youtube.com/watch?v=3IhQF4-HQdo&ab_channel=CodeWithHarryCodeWithHarryVerified';
   // res.json({linkIS:link});
@@ -45,8 +62,10 @@ exports.postUrl = async (req, res, next) => {
     exp.setFullYear(exp.getFullYear() + 1);
     console.log(exp);
   }
-  const key = makeId();
-
+  let key = makeId();
+  // while (keyExists(key)) {
+  //   key=makeId();
+  // }
   const url = new Url({
     url: link,
     key: key,
@@ -74,23 +93,24 @@ exports.postUrl = async (req, res, next) => {
 };
 exports.getUrl = (req, res, next) => {
   const key = req.params.shortner;
-  res.json({ shortnerIs: key });
+  // res.json({ shortnerIs: key });
   // console.log("KEY", req.params);
   // if (!key) {
   //   return res.redirect("/");
   // }
-  // Url.findOne({ key: key })
-  //   .then((result) => {
-  //     // res.redirect(result.url);
-  //     if (!result) {
-  //       res.render("404.ejs");
-  //     }
-  //     console.log(result);
-  //   })
-  //   .catch((err) => {
-  //     // console.log("getUrl");
-  //     console.log(err);
-  //   });
+  Url.findOne({ key: key })
+    .then((result) => {
+      // res.redirect(result.url);
+      if (!result) {
+       return res.render("404.ejs");
+      }
+      console.log(result);
+      res.redirect(result.url);
+    })
+    .catch((err) => {
+      // console.log("getUrl");
+      console.log(err);
+    });
 };
 
 exports.get404 = (req, res, next) => {};

@@ -6,36 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>katto url</title>
     <style>
-        #form{
-            display: flex;
-            height: 100%;
-            width: 100%;
-            
-            flex-direction: column;
-            justify-items: center;
-            align-items: center;
+      *{
+        padding: 0;
+        margin: 0;
+      }
+      #form {
+        display: flex;
+        height: 100%;
+        width: 100%;
 
-            align-content: center;
-            justify-content: center;
-        }
-        #error{
-            text-align: center;
-        }
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+
+        align-content: center;
+        justify-content: center;
+      }
+      #error {
+        text-align: center;
+      }
+      .long {
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 30rem;
+        text-overflow: ellipsis;
+        border: 1px solid black;
+      }
+      .table{
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      }
     </style>
   </head>
   <body>
-   
-    <div id="error">
-
-    </div>
+    <div id="error"></div>
 
     <form id="form" onsubmit="event.preventDefault(); return false;">
-
       <label for="url">Your Url</label>
       <input type="text" id="form-url" name="url" />
 
-      
-      <br>
+      <br />
+      <input type="date" id="form-cal"> 
       <label for="validity">Validity of shortened url</label>
       <select name="validity" id="form-validity">
         <option value="d">1 day</option>
@@ -43,10 +55,14 @@
         <option value="m">1 month</option>
         <option value="y">1 year</option>
       </select>
-      <br>
+      <br />
       <input type="button" id="form-submit" value="shorten" />
-    </form> 
-    <div id="division"></div>
+    </form>
+    <div>
+      <table id="table">
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>
