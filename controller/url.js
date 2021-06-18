@@ -36,6 +36,9 @@ const keyExists = (key) => {
 
 //! SERVER SIDE URL AUTH
 //! LOCALSTORAGE OF SHORTENED URLS
+//! media quary for <750px 
+//! DATEPICKER AS  FINAL VALIDITY
+//! ENHANCE STYLING
 exports.postUrl = async (req, res, next) => {
   // console.log("BODYY", req.body);
   // console.log("BODYY u", req.body.url);

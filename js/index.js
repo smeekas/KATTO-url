@@ -38,13 +38,13 @@ form.addEventListener("click", async (event) => {
       const tr = document.createElement("tr");
       const data_to_append = `
         
-      <td class="long">
+      <td scope="col" class="long">
         ${data.result.url}
       </td>
-      <td>
+      <td scope="col">
       <a id="link" href="http://localhost:5000/${data.result.key}">http://localhost:5000/${data.result.key}</a>
       </td>
-      <td>
+      <td scope="col" >
       <button id="copy">copy</button>
       </td>
         

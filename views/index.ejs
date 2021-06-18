@@ -5,49 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>katto url</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />
+
     <style>
-      *{
+      * {
         padding: 0;
         margin: 0;
+        box-sizing: border-box;
       }
-      #form {
-        display: flex;
-        height: 100%;
+      body {
+        background-color: #cacaca;
+      }
+      .outer {
+        background-color: blue;
         width: 100%;
-
-        flex-direction: column;
-        justify-items: center;
-        align-items: center;
-
-        align-content: center;
-        justify-content: center;
+        position: absolute;
+        padding: 1rem;
+        top: 30%;
       }
-      #error {
-        text-align: center;
+      .inner {
+        background-color: green;
+        width: 90%;
+        
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        /* align-content: center; */
+        /* justify-items: center; */
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      .div-form{
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        justify-content: center;
+        align-content: center;
+      }
+      .div-table{
+        padding: 1rem;
       }
       .long {
         white-space: nowrap;
         overflow: hidden;
         max-width: 30rem;
         text-overflow: ellipsis;
-        border: 1px solid black;
+        /* border: 1px solid black; */
       }
-      .table{
-      display: flex;
-      justify-content: center;
-      align-content: center;
+      #table{
+        background-color: #fff;
+        padding:0.5rem ;
       }
     </style>
   </head>
   <body>
     <div id="error"></div>
 
-    <form id="form" onsubmit="event.preventDefault(); return false;">
+    <!-- <form id="form" onsubmit="event.preventDefault(); return false;">
       <label for="url">Your Url</label>
       <input type="text" id="form-url" name="url" />
 
-      <br />
-      <input type="date" id="form-cal"> 
+      <input type="date" id="form-cal" />
       <label for="validity">Validity of shortened url</label>
       <select name="validity" id="form-validity">
         <option value="d">1 day</option>
@@ -55,14 +80,53 @@
         <option value="m">1 month</option>
         <option value="y">1 year</option>
       </select>
-      <br />
+
       <input type="button" id="form-submit" value="shorten" />
     </form>
-    <div>
-      <table id="table">
-        <tbody id="table-body"></tbody>
-      </table>
+    <div class="table-container">
+      <div>
+        <table id="table" class="table">
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </div> -->
+    <h1 style="text-align: center;">URL shortner</h1>
+    <div class="outer">
+      <div class="inner">
+        <div class="div-form">
+          <form id="form" onsubmit="event.preventDefault(); return false;">
+            <input type="text" id="form-url" name="url" placeholder="Your Url" />
+            <!-- <select name="validity" id="form-validity">
+              <option value="d">1 day</option>
+              <option value="w">1 week</option>
+              <option value="m">1 month</option>
+              <option value="y">1 year</option>
+            </select> -->
+            <input type="date" id="form-cal" />
+
+            <input type="button" id="form-submit" value="shorten" />
+          </form>
+        </div>
+        <div class="div-table">
+          <table id="table" class="table">
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+      </div>
     </div>
+
+    <!-- <div> //center
+  <div>  //80% flex column
+     form 
+    table
+  </div>
+</div> -->
+
     <script src="index.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
