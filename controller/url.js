@@ -5,6 +5,7 @@ exports.getIndex = (req, res, next) => {
   res.render("index.ejs", {
     success: false,
   });
+  localStorage.setItem('redirect','heroku');
   // res.json({indexIS:true});
 };
 
@@ -36,9 +37,10 @@ const keyExists = (key) => {
 
 //! SERVER SIDE URL AUTH
 //! LOCALSTORAGE EXPIRY DATE AND DELETION
-//! MORE STYLING
 //! DATEPICKER AS  FINAL VALIDITY
-//! ENHANCE STYLING
+//! DATEPICKER STYLING
+//! EXTERNAL CSS
+//! 404
 exports.postUrl = async (req, res, next) => {
   // console.log("BODYY", req.body);
   // console.log("BODYY u", req.body.url);

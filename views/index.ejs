@@ -21,18 +21,29 @@
         font-family: "Roboto", sans-serif;
       }
       body {
-        background-color: #cacaca;
+        background-color: #B6CBE1;
       }
+      #heading{
+    font-size: 4rem;
+    text-align: center;
+    color: #016295;
+  }
+  #sub-heading{
+    font-size: 1.5rem;
+    color: #0075BA;
+    text-align: center;
+  }
+  
       .outer {
-        background-color: blue;
+        background-color: #B6CBE1;
         width: 100%;
         position: absolute;
         padding: 1rem;
         top: 30%;
       }
       .inner {
-        background-color: #ddd;
-        width: 90%;
+        background-color: #034862;
+        width: 95%;
         border-radius: 10px;
 
         margin: auto;
@@ -45,10 +56,10 @@
         align-items: center;
       }
       .div-form {
-        /* padding: 0.2rem; */
+        padding: 1rem;
         width: 100%;
         margin: auto;
-        border: teal dotted 5px;
+        /* border: teal dotted 5px; */
           /* align-items: center;
         justify-items: center;
         justify-content: center;
@@ -63,6 +74,7 @@
         overflow: hidden;
         max-width: inherit;
         text-overflow: ellipsis;
+        color: #034862;
         /* border: 1px solid black; */
       }
       .form-group{
@@ -70,6 +82,8 @@
       }
       .control-label{
         display: inline-block;
+        margin-bottom: 10px;
+        color: #fff;
       }
       
        #form {
@@ -78,16 +92,16 @@
          display: flex;  
         flex-direction: row;
         align-items:  stretch;
-        border: 5px solid pink;
+        /* border: 5px solid pink; */
         /* flex-wrap: nowrap;  */
       }
       
       #form div {
-        padding: 0.4rem 0;
+        padding: 0.4rem 0.8rem;
         flex: 3;
         /* height: 100%; */
         /* align-items: flex-start; */
-        border: ridge 5px greenyellow;
+        /* border: ridge 5px greenyellow; */
       }
       #form #flex-btn{
         flex: 1;
@@ -100,6 +114,16 @@
         width: 100%;
         height: 2.5rem;
         font-size: 1rem;
+        background-color: #034862;
+        color: #fff;
+        border: none ;
+      }
+      .form-control:focus{
+        outline: none;
+        /* border: #4D9AB8 5px solid; */
+      }
+      .form-control::placeholder{
+        color: #B6CBE1;
       }
 
       #form-submit{
@@ -108,8 +132,8 @@
         padding: 15px 20px;
         width: 100%;
         height: 100%;
-        background-color: #3498db;
-        border-color: #3498db;
+        background-color: #0776A0;
+        border-color: #0776A0;
   color: #fff;
   /* box-shadow: 0 0 40px 40px #e74c3c inset, 0 0 0 0 #e74c3c; */
   /* transition: all 150ms ease-in-out; */
@@ -120,7 +144,7 @@
       }
       #form-submit:hover {
     /* box-shadow: 0 0 40px 40px #e74c3c inset; */
-    background-color: #0d7bc5 ;
+    background-color: #4D9AB8 ;
     /* color: #fff; */
   }
       #table {
@@ -145,7 +169,20 @@
         padding: 2rem;
         text-align: center;
       }
+      #table td a{
+        color: #4D9AB8;
+        cursor: pointer;
+      }
       @media screen and (max-width: 800px) {
+        .outer{
+          top:20%;
+          padding: 0;
+        }
+        .inner{
+          padding-top: 0.4rem;
+          /* margin: 0; */
+          width: 100%;
+        }
   #table {
     border: 0;
   }
@@ -165,10 +202,15 @@ font-weight: 0;
     align-items: stretch;
     
   }
+  #form div{
+    padding: 0.2rem 0.2rem;
+  }
+  .div-form{
+    padding: 0 0.2rem;
+  }
   .form-control{
     /* width: 100%; */
-    height: 1.8rem;
-    
+    height: 2rem;
     
   }
   #table tr {
@@ -177,6 +219,9 @@ font-weight: 0;
     margin-bottom: .625em;
   }
  
+  #heading{
+    font-size: 3rem;
+  }
   #table td {
     border-bottom: 1px solid #ddd;
     display: block;
@@ -197,6 +242,9 @@ font-weight: 0;
       }
   .form-control{
     width: 100%;
+  }
+  #heading{
+    font-size: 3rem;
   }
 }
       #error {
@@ -237,8 +285,8 @@ font-weight: 0;
 
 
 
-    <h1 style="text-align: center; font-size: 4rem">URL shortner</h1>
-    <h3 style="text-align: center">URLs shorter the better.</h3>
+    <h1  id="heading">URL shortner</h1>
+    <h3 id="sub-heading">URLs shorter the better.</h3>
     <div class="outer">
       <div class="inner">
         <div id="error"></div>
@@ -254,14 +302,15 @@ font-weight: 0;
 
 
             <div class="form-group">
-              <label class="col-md-4 control-label">Expiry Date</label>               
+              <label class=" control-label">Expiry Date</label>               
               <!-- <input type="text"> -->
                 <input
-                        type="date"
+                        type="text"
                         name="date"
                         id="form-cal"
-                        class="form-control"
-                        placeholder="expiray date"
+                        class="form-control datepicker"
+                        placeholder="DD/MM/YYYY"
+                        onclick="{this.type='date'}"
                       />
                 <!-- </div> -->
                 </div>
