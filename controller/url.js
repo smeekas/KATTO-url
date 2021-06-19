@@ -47,7 +47,7 @@ exports.postUrl = async (req, res, next) => {
   // res.json({linkIS:link});
   // console.log(req.body.url);
   // res.json({postURL:req.body.url})
-  const validity = req.body.validity;
+  const validity = req.body.validity || d;
   // const validity = 'd';
   const exp = new Date();
   // console.log(req.keyofurl);

@@ -13,10 +13,12 @@
     />
 
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
       * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+        font-family: "Roboto", sans-serif;
       }
       body {
         background-color: #cacaca;
@@ -31,7 +33,7 @@
       .inner {
         background-color: green;
         width: 90%;
-        
+
         margin: auto;
         display: flex;
         flex-direction: column;
@@ -41,7 +43,7 @@
         justify-content: space-evenly;
         align-items: center;
       }
-      .div-form{
+      .div-form {
         padding: 1rem;
         display: flex;
         align-items: center;
@@ -49,25 +51,87 @@
         justify-content: center;
         align-content: center;
       }
-      .div-table{
+      .div-table {
         padding: 1rem;
+        width: 100%;
       }
       .long {
         white-space: nowrap;
         overflow: hidden;
-        max-width: 30rem;
+        max-width: inherit;
         text-overflow: ellipsis;
         /* border: 1px solid black; */
       }
-      #table{
-        background-color: #fff;
-        padding:0.5rem ;
+      
+      #form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid pink;
+        flex-wrap: nowrap;
+      }
+      #form div {
+        padding: 0.5rem;
+      }
+      #table {
+        border: 1px solid pink;
+        border-collapse: collapse;
+        border: none;
+        /* border-radius: 10px; */
+        /* background-color: #fff; */
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        table-layout: fixed;
+      }
+      #table tr {
+        background-color: #f8f8f8;
+        border: 1px solid purple;
+        border: none;
+        padding: 0.35em;
+      }
+      #table th,
+      #table td {
+        padding: 0.625em;
+        text-align: center;
+      }
+      @media screen and (max-width: 800px) {
+  #table {
+    border: 0;
+  }
+  #table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  #table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: center; 
+  }
+
+  
+}
+
+@media screen and (max-width:400px){
+  
+  .shortned {
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: inherit;
+        text-overflow: ellipsis;
+      }
+  
+}
+      #error {
+        background-color: rgba(255, 0, 0, 0.8);
+        color: white;
+        padding: 0.2rem;
+        display: none;
       }
     </style>
   </head>
   <body>
-    <div id="error"></div>
-
     <!-- <form id="form" onsubmit="event.preventDefault(); return false;">
       <label for="url">Your Url</label>
       <input type="text" id="form-url" name="url" />
@@ -90,21 +154,41 @@
         </table>
       </div>
     </div> -->
-    <h1 style="text-align: center;">URL shortner</h1>
+    <h1 style="text-align: center; font-size: 4rem">URL shortner</h1>
+    <h3 style="text-align: center">URLs shorter the better.</h3>
     <div class="outer">
       <div class="inner">
+        <div id="error"></div>
+
         <div class="div-form">
           <form id="form" onsubmit="event.preventDefault(); return false;">
-            <input type="text" id="form-url" name="url" placeholder="Your Url" />
+            <div>
+              <label for="url">Your Url</label>
+              <input
+                type="text"
+                id="form-url"
+                name="url"
+                placeholder="Your Url"
+              />
+            </div>
             <!-- <select name="validity" id="form-validity">
               <option value="d">1 day</option>
               <option value="w">1 week</option>
               <option value="m">1 month</option>
               <option value="y">1 year</option>
             </select> -->
-            <input type="date" id="form-cal" />
-
-            <input type="button" id="form-submit" value="shorten" />
+            <div>
+              <label for="date">Expiry date</label>
+              <input
+                type="date"
+                name="date"
+                id="form-cal"
+                placeholder="expiry date"
+              />
+            </div>
+            <div>
+              <input type="button" id="form-submit" value="shorten" />
+            </div>
           </form>
         </div>
         <div class="div-table">
