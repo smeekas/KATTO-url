@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>katto url</title>
-    <link
+    <!-- <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
       crossorigin="anonymous"
-    />
+    /> -->
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
@@ -31,8 +31,9 @@
         top: 30%;
       }
       .inner {
-        background-color: green;
+        background-color: #ddd;
         width: 90%;
+        border-radius: 10px;
 
         margin: auto;
         display: flex;
@@ -44,12 +45,14 @@
         align-items: center;
       }
       .div-form {
-        padding: 1rem;
-        display: flex;
-        align-items: center;
+        /* padding: 0.2rem; */
+        width: 100%;
+        margin: auto;
+        border: teal dotted 5px;
+          /* align-items: center;
         justify-items: center;
         justify-content: center;
-        align-content: center;
+        align-content: center; */
       }
       .div-table {
         padding: 1rem;
@@ -62,21 +65,68 @@
         text-overflow: ellipsis;
         /* border: 1px solid black; */
       }
+      .form-group{
+        display: block;
+      }
+      .control-label{
+        display: inline-block;
+      }
       
-      #form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border: 1px solid pink;
-        flex-wrap: nowrap;
+       #form {
+         margin: auto;
+         width: 100%;
+         display: flex;  
+        flex-direction: row;
+        align-items:  stretch;
+        border: 5px solid pink;
+        /* flex-wrap: nowrap;  */
       }
+      
       #form div {
-        padding: 0.5rem;
+        padding: 0.4rem 0;
+        flex: 3;
+        /* height: 100%; */
+        /* align-items: flex-start; */
+        border: ridge 5px greenyellow;
       }
+      #form #flex-btn{
+        flex: 1;
+        height: 100%;
+        width: 100%;
+        /* justify-items: stretch; */
+      }
+      .form-control{
+        display: inline-block;
+        width: 100%;
+        height: 2.5rem;
+        font-size: 1rem;
+      }
+
+      #form-submit{
+        /* padding: 15px; */
+        /* margin: 0; */
+        padding: 15px 20px;
+        width: 100%;
+        height: 100%;
+        background-color: #3498db;
+        border-color: #3498db;
+  color: #fff;
+  /* box-shadow: 0 0 40px 40px #e74c3c inset, 0 0 0 0 #e74c3c; */
+  /* transition: all 150ms ease-in-out; */
+  /* transition: box-shadow 500ms ease-in-out, color 300ms ease-in-out; */
+        /* width: 100%; */
+        /* height: 100%; */
+        /* justify-self: stretch ; */
+      }
+      #form-submit:hover {
+    /* box-shadow: 0 0 40px 40px #e74c3c inset; */
+    background-color: #0d7bc5 ;
+    /* color: #fff; */
+  }
       #table {
-        border: 1px solid pink;
+        /* border: 10px solid yellow; */
         border-collapse: collapse;
-        border: none;
+        border-radius: 10px;
         /* border-radius: 10px; */
         /* background-color: #fff; */
         margin: 0;
@@ -86,27 +136,51 @@
       }
       #table tr {
         background-color: #f8f8f8;
-        border: 1px solid purple;
-        border: none;
+        border-bottom: 1px solid #ddd;
+        
         padding: 0.35em;
       }
       #table th,
       #table td {
-        padding: 0.625em;
+        padding: 2rem;
         text-align: center;
       }
       @media screen and (max-width: 800px) {
   #table {
     border: 0;
   }
+  #form{
+    flex-direction: column;
+  }
+  #form #form-submit{
+    /* padding: 0 100px;   */
+    /* padding: 0.2rem; */
+    border-radius: 10px;
+    width: 100%;
+font-size: 1.5rem;
+font-weight: 0;
+  }
+  #form {
+    
+    align-items: stretch;
+    
+  }
+  .form-control{
+    /* width: 100%; */
+    height: 1.8rem;
+    
+    
+  }
   #table tr {
     border-bottom: 3px solid #ddd;
     display: block;
     margin-bottom: .625em;
   }
+ 
   #table td {
     border-bottom: 1px solid #ddd;
     display: block;
+    padding: 0.625rem;
     text-align: center; 
   }
 
@@ -121,7 +195,9 @@
         max-width: inherit;
         text-overflow: ellipsis;
       }
-  
+  .form-control{
+    width: 100%;
+  }
 }
       #error {
         background-color: rgba(255, 0, 0, 0.8);
@@ -154,6 +230,13 @@
         </table>
       </div>
     </div> -->
+
+
+
+    
+
+
+
     <h1 style="text-align: center; font-size: 4rem">URL shortner</h1>
     <h3 style="text-align: center">URLs shorter the better.</h3>
     <div class="outer">
@@ -162,7 +245,27 @@
 
         <div class="div-form">
           <form id="form" onsubmit="event.preventDefault(); return false;">
-            <div>
+
+
+            <div class="form-group">
+              <label class="col-md-2 control-label">Your Url</label>
+                <input type="text" class="form-control" placeholder="URL" name="url" id="form-url">
+            </div>
+
+
+            <div class="form-group">
+              <label class="col-md-4 control-label">Expiry Date</label>               
+              <!-- <input type="text"> -->
+                <input
+                        type="date"
+                        name="date"
+                        id="form-cal"
+                        class="form-control"
+                        placeholder="expiray date"
+                      />
+                <!-- </div> -->
+                </div>
+            <!-- <div>
               <label for="url">Your Url</label>
               <input
                 type="text"
@@ -171,12 +274,7 @@
                 placeholder="Your Url"
               />
             </div>
-            <!-- <select name="validity" id="form-validity">
-              <option value="d">1 day</option>
-              <option value="w">1 week</option>
-              <option value="m">1 month</option>
-              <option value="y">1 year</option>
-            </select> -->
+            
             <div>
               <label for="date">Expiry date</label>
               <input
@@ -185,10 +283,16 @@
                 id="form-cal"
                 placeholder="expiry date"
               />
+            </div> -->
+            <div id="flex-btn">
+              <button type="button" id="form-submit"  >shorten</button>
             </div>
-            <div>
-              <input type="button" id="form-submit" value="shorten" />
-            </div>
+            <!-- <select name="validity" id="form-validity">
+              <option value="d">1 day</option>
+              <option value="w">1 week</option>
+              <option value="m">1 month</option>
+              <option value="y">1 year</option>
+            </select> -->
           </form>
         </div>
         <div class="div-table">
@@ -207,10 +311,10 @@
 </div> -->
 
     <script src="index.js"></script>
-    <script
+    <!-- <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
   </body>
 </html>

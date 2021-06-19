@@ -11,14 +11,13 @@ function setStorage(data) {
   }
   links.push({
     url: data.result.url,
-    link: "http://localhost:/5000/" + data.result.link,
+    link: "http://localhost:5000/" + data.result.key,
   });
   localStorage.setItem("url-shortner-data", JSON.stringify(links));
 }
 function showData() {
   const table = document.getElementById("table-body");
   const links = JSON.parse(localStorage.getItem("url-shortner-data"));
-  console.log(links);
   if(!links){
     return;
   }
@@ -59,8 +58,6 @@ form.addEventListener("click", async (event) => {
     error.style.display = "inline-block";
     error.innerHTML = "INVALID URL";
   } else {
-    console.log(url.slice(0, 7));
-    console.log(url.slice(0, 8));
     if (!(url.slice(0, 7) !== "http://") && !(url.slice(0, 8) !== "https://")) {
       url = "http://" + url;
     }
@@ -78,9 +75,7 @@ form.addEventListener("click", async (event) => {
           validity: validity,
         }),
       });
-      console.log(result);
       const data = await result.json();
-      console.log(data);
       setStorage(data);
       showData();
       // window.location.href = "http://localhost:5000/";
