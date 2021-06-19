@@ -19,13 +19,13 @@ app.use(urlRoutes);
 // app.use((error, req, res, next) => {});
 
 mongoose.connect(
-  "mongodb+srv://smeet:smeet@cluster0.uyisx.mongodb.net/katto-url",
+  process.env.MONGO_URL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   }
 ).then(result=>{
-    app.listen(5000);
+    app.listen(process.env.PORT || 5000);
     console.log('connected..');
 }).catch(err=>{
     console.log(err);

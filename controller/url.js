@@ -35,8 +35,8 @@ const keyExists = (key) => {
 };
 
 //! SERVER SIDE URL AUTH
-//! LOCALSTORAGE OF SHORTENED URLS
-//! media quary for <750px 
+//! LOCALSTORAGE EXPIRY DATE AND DELETION
+//! MORE STYLING
 //! DATEPICKER AS  FINAL VALIDITY
 //! ENHANCE STYLING
 exports.postUrl = async (req, res, next) => {
