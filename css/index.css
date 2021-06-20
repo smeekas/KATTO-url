@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Roboto", sans-serif;
+      }
+      body {
+        background-color: #B6CBE1;
+      }
+      #heading{
+    font-size: 4rem;
+    text-align: center;
+    color: #016295;
+  }
+  #sub-heading{
+    font-size: 1.5rem;
+    color: #0075BA;
+    text-align: center;
+  }
+  
+      .outer {
+        background-color: #B6CBE1;
+        width: 100%;
+        position: absolute;
+        padding: 1rem;
+        top: 30%;
+      }
+      .inner {
+        background-color: #034862;
+        width: 95%;
+        border-radius: 10px;
+
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      .div-form {
+        padding: 1rem;
+        width: 100%;
+        margin: auto;
+        
+      }
+      .div-table {
+        padding: 1rem;
+        width: 100%;
+      }
+      .long {
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: inherit;
+        text-overflow: ellipsis;
+        color: #034862;
+      }
+      .form-group{
+        display: block;
+      }
+      .control-label{
+        display: inline-block;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+      
+       #form {
+         margin: auto;
+         width: 100%;
+         display: flex;  
+        flex-direction: row;
+        align-items:  stretch;
+      }
+      
+      #form div {
+        padding: 0.4rem 0.8rem;
+        flex: 3;
+      }
+      #form #flex-btn{
+        flex: 1;
+        height: 100%;
+        width: 100%;
+      }
+      .form-control{
+        display: inline-block;
+        width: 100%;
+        height: 2.5rem;
+        font-size: 1rem;
+        background-color: #034862;
+        color: #fff;
+        border: none;
+        border-bottom: 1px solid #B6CBE1;
+      }
+      .form-control:focus{
+        outline: none;
+      }
+      .form-control::placeholder{
+        color: #B6CBE1;
+      }
+     
+.datepicker{
+  position: relative;
+}
+
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+
+    position: absolute;
+     top: 0;
+    
+    right: 10px;
+    
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23B6CBE1" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+    background-size: 1.5rem;
+
+}
+
+      #form-submit{
+        padding: 15px 20px;
+        width: 100%;
+        height: 100%;
+        background-color: #0776A0;
+        border-color: #0776A0;
+  color: #fff;
+
+      }
+      #form-submit:hover {
+    background-color: #4D9AB8 ;
+  }
+      #table {
+        border-collapse: collapse;
+        border-radius: 10px;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        table-layout: fixed;
+      }
+      #table tr {
+        background-color: #f8f8f8;
+        border-bottom: 1px solid #ddd;
+        
+        padding: 0.35em;
+      }
+      #table th,
+      #table td {
+        padding: 2rem;
+        text-align: center;
+      }
+      #table td a{
+        color: #4D9AB8;
+        cursor: pointer;
+      }
+      @media screen and (max-width: 800px) {
+        .outer{
+          top:20%;
+          padding: 0;
+        }
+        .inner{
+          padding-top: 0.4rem;
+          width: 100%;
+        }
+  #table {
+    border: 0;
+  }
+  #form{
+    flex-direction: column;
+  }
+  #form #form-submit{
+    
+    border-radius: 10px;
+    width: 100%;
+font-size: 1.5rem;
+font-weight: 0;
+  }
+  #form {
+    
+    align-items: stretch;
+    
+  }
+  #form div{
+    padding: 0.5rem 0.5rem;
+  }
+  .div-form{
+    padding: 0 0.2rem;
+  }
+  .form-control{
+    /* width: 100%; */
+    height: 2rem;
+    
+  }
+  #table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+ 
+  #heading{
+    font-size: 3rem;
+  }
+  #table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    padding: 0.625rem;
+    text-align: center; 
+  }
+
+  
+}
+
+@media screen and (max-width:400px){
+  
+  .shortned {
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: inherit;
+        text-overflow: ellipsis;
+      }
+  .form-control{
+    width: 100%;
+  }
+  #heading{
+    font-size: 3rem;
+  }
+}
+      #error {
+        background-color: rgba(255, 0, 0, 0.8);
+        color: white;
+        padding: 0.2rem;
+        display: none;
+      }

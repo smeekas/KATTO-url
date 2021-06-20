@@ -1,7 +1,7 @@
 const form = document.getElementById("form-submit");
 const copy_btn = document.getElementById("copy");
 
-function setStorage(data) {
+async function  setStorage(data) {
   const lsData = localStorage.getItem("url-shortner-data");
   let links;
   if (lsData == null) {
@@ -9,27 +9,42 @@ function setStorage(data) {
   } else {
     links = JSON.parse(lsData);
   }
+  console.log("SETSTORAGE unpushed link ",links);
   links.push({
-    url: data.result.url,
-    link: "http://localhost:5000/" + data.result.key,
+    url: data.url,
+    link: data.link,
+    expireAt:data.expireAt
   });
-  localStorage.setItem("url-shortner-data", JSON.stringify(links));
+  console.log("SETSTORAGE pushed link ",links);
+  console.log(JSON.stringify(links));
+  // console.log(JSON.parse(links));
+  localStorage.setItem("url-shortner-data", await JSON.stringify(links));
+  localStorage.setItem("checking",true);
 }
-function showData() {
+async function showData() {
   const table = document.getElementById("table-body");
-  const links = JSON.parse(localStorage.getItem("url-shortner-data"));
+  table.innerHTML=``;
+  const links = JSON.parse(await localStorage.getItem("url-shortner-data"));
+  console.log("SHOWDATA parsed link ",links);
   if(!links){
+    console.log("RETURN");
     return;
   }
-  for (let i = 0; i < links.length; i++) {
+  // const filtered=links.filter((a)=>{
+  //     return new Date().getTime()<new Date(a.expireAt).getTime()
+  // });
+  const filtered=links;
+  console.log("SHOWDATA FILTERED ",filtered);
+  // localStorage.setItem("url-shortner-data",JSON.stringify(filtered))
+  for (let i = 0; i < filtered.length; i++) {
     const tr = document.createElement("tr");
     const data_to_append = `
     
   <td scope="col" class="long">
-    ${links[i].url}
+    ${filtered[i].url}
   </td>
   <td scope="col" class="shortned" >
-  <a id="link"  href="${links[i].link}">${links[i].link}</a>
+  <a id="link" target="_blank" href="${filtered[i].link}">${filtered[i].link}</a>
   </td>
   <td scope="col" >
   <button id="copy">copy</button>
@@ -49,21 +64,21 @@ form.addEventListener("click", async (event) => {
     /(http(s)?:\/\/.)?(ftp(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{0,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i;
   //check if its valid url
   let url = document.getElementById("form-url").value;
-  // const validity = document.getElementById("form-validity").value;
-  const validity = "d";
-  console.log(new Date(document.getElementById("form-cal").value));
-  // console.log(re.test(url));
+  const validity = new Date(document.getElementById("form-cal").value);
+
+
   if (!re.test(url)) {
     const error = document.getElementById("error");
     error.style.display = "inline-block";
     error.innerHTML = "INVALID URL";
   } else {
-    if (!(url.slice(0, 7) !== "http://") && !(url.slice(0, 8) !== "https://")) {
+    
+    if (!(url.slice(0, 7).toLowerCase() !== "http://") && !(url.slice(0, 8).toLowerCase() !== "https://")) {
+      url = "http://" + url;
+    }else if(url.slice(0,3).toLowerCase()==="www"){
       url = "http://" + url;
     }
-    // else if (url.slice(0, 8) !== "https://") {
-    //   url = "http://" + url;
-    // }
+    
     try {
       const result = await fetch("/postUrl", {
         method: "POST",
@@ -75,27 +90,17 @@ form.addEventListener("click", async (event) => {
           validity: validity,
         }),
       });
-      const data = await result.json();
-      setStorage(data);
-      showData();
-      // window.location.href = "http://localhost:5000/";
-      // const table = document.getElementById("table-body");
-      // const tr = document.createElement("tr");
-      // const data_to_append = `
-
-      // <td scope="col" class="long">
-      //   ${data.result.url}
-      // </td>
-      // <td scope="col" class="shortned" >
-      // <a id="link"  href="http://localhost:5000/${data.result.key}">http://localhost:5000/${data.result.key}</a>
-      // </td>
-      // <td scope="col" >
-      // <button id="copy">copy</button>
-      // </td>
-
-      // `;
-      // tr.innerHTML = data_to_append;
-      // table.prepend(tr);
+      const  data = await result.json();
+      const setData={
+          url:data.result.url,
+          link:"http://localhost:5000/"+data.result.key,
+          expireAt:data.result.expireAt
+        
+      }
+      console.log("DATABASE RESPONSE ",setData);
+      await setStorage(setData);
+      await showData();
+      
     } catch (error) {
       console.log("index.js");
       console.log(error);

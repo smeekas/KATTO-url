@@ -12,10 +12,8 @@ const urlSchema = new Schema({
     require: true,
   },
   expireAt: { type: Date, },
-  // createdAt:{
-  //   type:Date,
-  //   expires
-  // }
+  
 });
-// urlSchema.index({ expireAt: 1 }, { expireAfterSecond: 0 });
+urlSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 });
+// urlSchema.index({ expireAt: 1 }, { expireAfterSeconds: 0 });
 module.exports = mongoose.model("Url", urlSchema);

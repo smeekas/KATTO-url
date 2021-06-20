@@ -1,11 +1,10 @@
 const moment = require("moment");
 const Url = require("../model/url");
 exports.getIndex = (req, res, next) => {
-  console.log("index");
-  res.render("index.ejs", {
+  console.log("IN INDEX");
+  return res.render("index.ejs", {
     success: false,
   });
-  localStorage.setItem('redirect','heroku');
   // res.json({indexIS:true});
 };
 
@@ -35,42 +34,35 @@ const keyExists = (key) => {
     });
 };
 
-//! SERVER SIDE URL AUTH
-//! LOCALSTORAGE EXPIRY DATE AND DELETION
-//! DATEPICKER AS  FINAL VALIDITY
-//! DATEPICKER STYLING
-//! EXTERNAL CSS
-//! 404
+//! SERVER SIDE URL AUTH and DATE NOT NULL
+//!AUTH JWT 
+
 exports.postUrl = async (req, res, next) => {
-  // console.log("BODYY", req.body);
-  // console.log("BODYY u", req.body.url);
+  console.log("IN POSTURL");
   const link = req.body.url;
-  // const link = 'https://www.youtube.com/watch?v=3IhQF4-HQdo&ab_channel=CodeWithHarryCodeWithHarryVerified';
-  // res.json({linkIS:link});
-  // console.log(req.body.url);
-  // res.json({postURL:req.body.url})
-  const validity = req.body.validity || d;
+  
+  const validity = req.body.validity ;
   // const validity = 'd';
-  const exp = new Date();
-  // console.log(req.keyofurl);
+  const exp = new Date(validity);
   console.log(exp);
-  if (validity === "d") {
-    exp.setDate(exp.getDate() + 1);
-    console.log(exp);
-  } else if (validity === "w") {
-    exp.setDate(exp.getDate() + 7);
-    console.log(exp);
-  } else if (validity === "m") {
-    exp.setMonth(exp.getMonth() + 1);
-    console.log(exp);
-  } else if (validity === "y") {
-    exp.setFullYear(exp.getFullYear() + 1);
-    console.log(exp);
-  }
+  // if (validity === "d") {
+  //   exp.setDate(exp.getDate() + 1);
+  //   console.log(exp);
+  // } else if (validity === "w") {
+  //   exp.setDate(exp.getDate() + 7);
+  //   console.log(exp);
+  // } else if (validity === "m") {
+  //   exp.setMonth(exp.getMonth() + 1);
+  //   console.log(exp);
+  // } else if (validity === "y") {
+  //   exp.setFullYear(exp.getFullYear() + 1);
+  //   console.log(exp);
+  // }
   let key = makeId();
   // while (keyExists(key)) {
   //   key=makeId();
   // }
+
   const url = new Url({
     url: link,
     key: key,
@@ -88,34 +80,25 @@ exports.postUrl = async (req, res, next) => {
     console.log("postUrl");
     console.log(err);
   }
-  //   // res.render("index.ejs", {
-  //   //   success: true,
-  //   //   shorted: `http://localhost:5000/${result.key}`,
-  //   // });
-  //   // res.json({'success':true});
-  //   res.json({ result: result });
-  // });
+
 };
 exports.getUrl = (req, res, next) => {
+  console.log("IN GETURL");
   const key = req.params.shortner;
-  // res.json({ shortnerIs: key });
-  // console.log("KEY", req.params);
-  // if (!key) {
-  //   return res.redirect("/");
-  // }
+  
   Url.findOne({ key: key })
     .then((result) => {
-      // res.redirect(result.url);
       if (!result) {
-       return res.render("404.ejs");
+        console.log("404");
+        return res.render("404.ejs");
       }
       console.log(result);
       res.redirect(result.url);
+      // res.redirect("http://yahoo.com");
     })
     .catch((err) => {
-      // console.log("getUrl");
-      console.log(err);
+      console.log("getUrl");
+      // console.log(err);
     });
 };
 
-exports.get404 = (req, res, next) => {};
