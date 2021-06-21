@@ -108,7 +108,7 @@ form.addEventListener("click", async (event) => {
       const  data = await result.json();
       const setData={
           url:data.result.url,
-          link:"http://localhost:5000/"+data.result.key,
+          link:"https://katto-url.herokuapp.com/"+data.result.key,
           expireAt:data.result.expireAt,
           key:data.result.key
       }
