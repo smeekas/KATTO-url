@@ -1,5 +1,5 @@
 const form = document.getElementById("form-submit");
-const copy_btn = document.getElementById("copy");
+
 
 async function  setStorage(data) {
   const lsData = localStorage.getItem("url-shortner-data");
@@ -13,7 +13,8 @@ async function  setStorage(data) {
   links.push({
     url: data.url,
     link: data.link,
-    expireAt:data.expireAt
+    expireAt:data.expireAt,
+    key:data.key
   });
   console.log("SETSTORAGE pushed link ",links);
   console.log(JSON.stringify(links));
@@ -44,15 +45,29 @@ async function showData() {
     ${filtered[i].url}
   </td>
   <td scope="col" class="shortned" >
-  <a id="link" target="_blank" href="${filtered[i].link}">${filtered[i].link}</a>
+  <a id="link" target="_blank"  href="${filtered[i].link}">${filtered[i].link}</a>
   </td>
-  <td scope="col" >
-  <button id="copy">copy</button>
+  <td scope="col" class="btn-copy">
+  <button class="copy ${filtered[i].key}">copy</button>
   </td>
     
   `;
     tr.innerHTML = data_to_append;
     table.prepend(tr);
+    const copy_btn = document.getElementsByClassName(`copy ${filtered[i].key}`)[0];
+    console.log(copy_btn);
+    copy_btn.addEventListener("click", async () => {
+    
+      const something=copy_btn.parentNode.parentNode.children[1].children[0].getAttribute("href");
+      
+      console.log(something);
+     
+      await navigator.clipboard.writeText(something);
+      copy_btn.innerText = "copied!!";
+      setTimeout(() => {
+        copy_btn.innerText = "copy";
+      }, 500);
+    });
   }
 }
 (()=>{
@@ -63,7 +78,7 @@ form.addEventListener("click", async (event) => {
   let re =
     /(http(s)?:\/\/.)?(ftp(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{0,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i;
   //check if its valid url
-  let url = document.getElementById("form-url").value;
+  let url = document.getElementById("form-url").value.trim();
   const validity = new Date(document.getElementById("form-cal").value);
 
 
@@ -94,8 +109,8 @@ form.addEventListener("click", async (event) => {
       const setData={
           url:data.result.url,
           link:"http://localhost:5000/"+data.result.key,
-          expireAt:data.result.expireAt
-        
+          expireAt:data.result.expireAt,
+          key:data.result.key
       }
       console.log("DATABASE RESPONSE ",setData);
       await setStorage(setData);
@@ -107,13 +122,4 @@ form.addEventListener("click", async (event) => {
     }
   }
 });
-// copy_btn.addEventListener("click", () => {
-//   const copyText = document.getElementById("link");
-//   copyText.text.select();
-//   copyText.setSelectionRange(0, 99999);
-//   document.execCommand("copy");
-//   // copy_btn.innerText = "copied";
-//   // setTimeout(() => {
-//   //   copy_btn.innerText = "copy";
-//   // }, 2000);
-// });
+

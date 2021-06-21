@@ -1,7 +1,6 @@
 const moment = require("moment");
 const Url = require("../model/url");
 exports.getIndex = (req, res, next) => {
-  console.log("IN INDEX");
   return res.render("index.ejs", {
     success: false,
   });
@@ -16,7 +15,6 @@ const makeId = () => {
   for (let i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charLength));
   }
-  console.log("ID", result);
   return result;
 };
 
@@ -30,7 +28,8 @@ const keyExists = (key) => {
       }
     })
     .catch((err) => {
-      console.log("keyExists");
+      // console.log("keyExists");
+      console.log(err);
     });
 };
 
@@ -44,7 +43,7 @@ exports.postUrl = async (req, res, next) => {
   const validity = req.body.validity ;
   // const validity = 'd';
   const exp = new Date(validity);
-  console.log(exp);
+  // console.log(exp);
   // if (validity === "d") {
   //   exp.setDate(exp.getDate() + 1);
   //   console.log(exp);
@@ -77,28 +76,28 @@ exports.postUrl = async (req, res, next) => {
     //   console.log(result);
     res.status(200).json({ result: result, success: true });
   } catch (err) {
-    console.log("postUrl");
+    // console.log("postUrl");
     console.log(err);
   }
 
 };
 exports.getUrl = (req, res, next) => {
-  console.log("IN GETURL");
+  // console.log("IN GETURL");
   const key = req.params.shortner;
   
   Url.findOne({ key: key })
     .then((result) => {
       if (!result) {
-        console.log("404");
+        // console.log("404");
         return res.render("404.ejs");
       }
-      console.log(result);
+      // console.log(result);
       res.redirect(result.url);
       // res.redirect("http://yahoo.com");
     })
     .catch((err) => {
-      console.log("getUrl");
-      // console.log(err);
+      // console.log("getUrl");
+      console.log(err);
     });
 };
 

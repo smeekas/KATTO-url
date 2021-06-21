@@ -43,6 +43,7 @@
         margin: auto;
         
       }
+      
       .div-table {
         padding: 1rem;
         width: 100%;
@@ -144,7 +145,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
       #table th,
       #table td {
         padding: 2rem;
+        /* border: 2px solid red; */
         text-align: center;
+      }
+      #table .btn-copy{
+        /* border: 5px dashed red; */
+        padding: 0;
+        height: 100%;
+      }
+      #table tr:nth-child(odd){
+        background-color: #dcdcdc;
+      }
+      #table .copy{
+        /* border: 5px dashed green; */
+        background-color: #1B91BF;
+        color: #fff;
+        width: 60%;
+        padding: 0.5rem;
+        margin: 0;
+      }
+      #table .copy:hover{
+        background-color: #0776A0;
+        
       }
       #table td a{
         color: #4D9AB8;
